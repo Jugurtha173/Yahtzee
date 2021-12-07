@@ -28,18 +28,24 @@ void Yahtzee::partie::initPlayers()
 
 void Yahtzee::partie::launch()
 {
-	std::cout << "**************** STARTING GAME ****************\n\n";
+	std::cout << "**************** DEBUT DU JEU ****************\n\n";
 
 	unsigned int numberFinishedPlayers = 0;
 
 	while (numberFinishedPlayers < numberPlayers) {
 		for (joueur* player : players) {
 
-			std::cout << "Tour de : " << *player << std::endl;
+			std::cout 
+				<< "**********************************************"<< std::endl
+				<< "\tTour de : " << *player << std::endl
+				<< "**********************************************"<< std::endl;
 
 			player->play();
 			roll->unholdAll();
 			showTable();
+			if (player->hasFinished()) {
+				numberFinishedPlayers++;
+			}
 
 		}
 	}

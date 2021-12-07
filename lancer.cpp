@@ -33,9 +33,13 @@ void Yahtzee::lancer::rollDices()
 void Yahtzee::lancer::holdDicesByIndex(const std::vector<unsigned int>& indexes, bool hold)
 {
 
+	for (de* dice : dices) {
+		dice->isHeld = false;
+	}
+
 	for (unsigned int index : indexes) {
 		if (index >= 1 && index <= 5) {
-			dices.at(index-1)->isHeld = hold;
+			dices.at(index-1)->isHeld = true;
 		}
 	}
 

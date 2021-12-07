@@ -17,6 +17,8 @@ namespace Yahtzee {
 		const static unsigned int nbrTurns = 3;
 
 		//
+		unsigned int totalSup = 0;
+		unsigned int totalInf = 0;
 		const std::string name;
 		std::vector<figure*> figures;
 		lancer* roll;

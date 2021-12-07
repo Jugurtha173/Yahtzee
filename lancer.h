@@ -20,6 +20,8 @@ namespace Yahtzee {
 		lancer();
 		~lancer();
 
+		std::vector<de*>& getDices() { return dices; };
+
 		void rollDices();
 		void holdDicesByIndex(const std::vector<unsigned int>& indexes, bool hold = true); // hold ba default
 		void unholdDicesByIndex(const std::vector<unsigned int>& indexes);

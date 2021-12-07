@@ -20,12 +20,13 @@ void Yahtzee::joueur::play() const
             std::getline(std::cin, strChoices);
             std::vector<unsigned int> holdIndexes = extractInts(strChoices);
             roll->holdDicesByIndex(holdIndexes);
-
+            /*
             // unhold
             std::cout << "Selectionez les indices des des a RELACHER (ex. 1 3 5) : ";
             std::getline(std::cin, strChoices);
             std::vector<unsigned int> unholdIndexes = extractInts(strChoices);
             roll->unholdDicesByIndex(unholdIndexes);
+            */
         }
         
 

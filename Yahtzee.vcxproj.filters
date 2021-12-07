@@ -36,6 +36,15 @@
     <ClCompile Include="figuresJeu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="brelan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="figureSuperieur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="figureInferieur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="figure.h">
@@ -54,6 +63,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="figuresJeu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="brelan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="figureSuperieur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="figureInferieur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
