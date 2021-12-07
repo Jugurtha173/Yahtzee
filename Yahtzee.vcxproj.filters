@@ -15,63 +15,63 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Yahtzee.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="figure.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lancer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="joueur.cpp">
+    <ClCompile Include="brelan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="de.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="partie.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="figuresJeu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="brelan.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="figureSuperieur.cpp">
+    <ClCompile Include="figure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="figureInferieur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="figuresJeu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="figureSuperieur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="joueur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lancer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="partie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Yahtzee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="figure.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lancer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="joueur.h">
+    <ClInclude Include="brelan.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="de.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="partie.h">
+    <ClInclude Include="figure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="figuresJeu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="brelan.h">
+    <ClInclude Include="figureInferieur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="figureSuperieur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="figureInferieur.h">
+    <ClInclude Include="figuresJeu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="joueur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="partie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
