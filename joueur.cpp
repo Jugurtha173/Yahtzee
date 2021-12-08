@@ -1,4 +1,5 @@
 #include "joueur.h"
+#include <iomanip>
 
 Yahtzee::joueur::joueur(std::string name, lancer* roll, std::vector<figure*> figures) :
     name(name), roll(roll), figures(figures)
@@ -12,7 +13,12 @@ void Yahtzee::joueur::play() const
 	std::string strChoices;
 	for ( unsigned int i = 1; i <= nbrTurns; ++i) {
         std::cout << "\n";
+
+        // lancer les des
 		roll->rollDices();
+
+        // evaluation des figures
+        allFiguresEval();
 
         if (i < nbrTurns) {
             // hold
@@ -31,8 +37,7 @@ void Yahtzee::joueur::play() const
         
 
 
-        // eval des figures
-        allFiguresEval();
+        
 	}
     makeChoice();
 }
@@ -44,8 +49,11 @@ void Yahtzee::joueur::allFiguresEval() const
     for (figure* figure : figures) {
         ++index;
         if (!figure->isUsed()) {
-            std::cout << "\t" << index << ": ";
-            figure->eval(roll);
+            std::cout << "\t" << index << ": "
+                << "\t" << std::setw(10) << std::left 
+                << figure->name<< " : " 
+                << figure->eval(roll) 
+                << std::endl;
         }
     }
 }
@@ -56,13 +64,13 @@ void Yahtzee::joueur::makeChoice() const
 
     unsigned int choice = getIntInput() - 1;
 
-    figures.at(choice)->userValue = figures.at(choice)->currentValue;
+    figures.at(choice)->playerPoints = figures.at(choice)->currentPoints;
     figures.at(choice)->used = true;
 
     // reset figures
     for (figure* figure : figures) {
         if (!figure->isUsed()) {
-            figure->currentValue = 0;
+            figure->currentPoints = 0;
         }
     }
 

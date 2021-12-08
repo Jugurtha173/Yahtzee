@@ -14,7 +14,6 @@ unsigned int Yahtzee::figureSuperieur::eval(lancer* roll)
 
 	sum *= value;
 
-	std::cout  << "\t" << std::setw(10) << std::left << name << " : " << sum << std::endl;
-	currentValue = sum;
+	currentPoints = sum;
 	return sum;
 }

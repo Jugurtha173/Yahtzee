@@ -2,8 +2,8 @@
 
 
 #include <vector>
-#include "figure.h"
 #include "figureSuperieur.h"
+#include "figureInferieur.h"
 
 namespace Yahtzee {
 
@@ -13,6 +13,7 @@ namespace Yahtzee {
 	public:
 
 		static std::vector<figure*> getFigures() {
+
 			std::vector<figure*> figures;
 
 			figures.push_back(new figureSuperieur("As", 1));
@@ -23,18 +24,12 @@ namespace Yahtzee {
 			figures.push_back(new figureSuperieur("Six", 6));
 
 			
-
-			/*
-			
-			
-			figures.push_back(new figure("As", 1));
-			figures.push_back(new figure("Deux", 2));
-			figures.push_back(new figure("Trois", 3));
-			figures.push_back(new figure("Quatre", 4));
-			figures.push_back(new figure("Cinq", 5));
-			figures.push_back(new figure("Six", 6));
-
-			*/
+			figures.push_back(new identical<3>("Brelan"));
+			figures.push_back(new suite<4, 30>("Petite S"));
+			figures.push_back(new suite<5, 40>("Grande S"));
+			figures.push_back(new identical<4>("Carre"));
+			figures.push_back(new identical<5, 50>("Yahtzee"));
+			figures.push_back(new chance());
 
 			return figures;
 		}

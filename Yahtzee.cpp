@@ -24,6 +24,12 @@ using namespace Yahtzee;
 int main()
 {
 
+    char cpt = 0;
+
+    cpt++; cpt++;
+
+    std::cout << sizeof(char) << std::endl;
+
     
    partie game;
 
