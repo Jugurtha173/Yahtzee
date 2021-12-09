@@ -13,6 +13,8 @@ namespace Yahtzee {
 
 	class lancer
 	{
+		unsigned int numberOfFaces = 6;
+		unsigned int numberOfDices = 5;
 		std::vector<de*> dices;
 
 
@@ -23,9 +25,9 @@ namespace Yahtzee {
 		~lancer();
 
 		std::vector<de*>& getDices() { return dices; };
-		std::vector<unsigned int> getDicesValues() const ;
+		std::vector<unsigned int> getDicesOccurences() const ;
 
-		void rollDices() ;
+		std::vector<unsigned int> rollDices() ;
 		void holdDicesByIndex(const std::vector<unsigned int>& indexes, bool hold = true); // hold ba default
 		void unholdDicesByIndex(const std::vector<unsigned int>& indexes);
 		void unholdAll();

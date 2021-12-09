@@ -2,13 +2,12 @@
 
 
 
-unsigned int Yahtzee::chance::eval(lancer* roll)
+unsigned int Yahtzee::chance::eval(std::vector<unsigned int>& dicesOccurences)
 {
 	unsigned int sum = 0;
 
-	std::vector<unsigned int> dicesValues = roll->getDicesValues();
-	for (unsigned int dice : dicesValues) {
-		sum += dice;
+	for (unsigned int i = 1; i <= dicesOccurences.size(); ++i) {
+		sum += dicesOccurences.at(i-1) * i;
 	}
 
 	currentPoints = sum;

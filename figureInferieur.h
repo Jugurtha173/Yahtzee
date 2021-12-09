@@ -27,7 +27,7 @@ namespace Yahtzee {
 	public:
 		chance() : figureInferieur("Chance") {}
 
-		unsigned int eval(lancer* roll) override;
+		unsigned int eval(std::vector<unsigned int>& dicesOccurences) override;
 	
 	};
 
@@ -41,14 +41,13 @@ namespace Yahtzee {
 	public:
 		identical(const std::string& name) : figureInferieur(name) {}
 
-		unsigned int eval(lancer* roll) override;
+		unsigned int eval(std::vector<unsigned int>& dicesOccurences) override;
 	};
 
 	template<int size, int points>
-	inline unsigned int identical<size, points>::eval(lancer* roll)
+	inline unsigned int identical<size, points>::eval(std::vector<unsigned int>& dicesOccurences)
 	{
-		
-		std::vector<unsigned int> dicesValues = roll->getDicesValues();
+		/*
 		int verifications = dicesValues.size() - size + 1;
 
 		for (int i = 0; i < verifications; ++i) {
@@ -60,13 +59,23 @@ namespace Yahtzee {
 				}
 			}
 		}
+		*/
 
+
+		bool found = false;
 		unsigned int result = 0;
-		if (points == 0) {
-			for (unsigned int dice : dicesValues) {
-				result += dice;
+		for (unsigned int dice = 1; dice <= dicesOccurences.size(); ++dice ) {
+			unsigned int occurenceDice = dicesOccurences.at(dice-1);
+			if (occurenceDice == size) {
+				found = true;
 			}
+			result += (occurenceDice * dice);
 		}
+
+		
+		result = found ? ( points > 0 ? points : result) : 0	; 
+		
+
 		currentPoints = result;
 		return result;
 
@@ -74,7 +83,6 @@ namespace Yahtzee {
 
 
 	// pour les suites 
-
 	// size   : taille de la suite (Petite ou Grande)
 	// points : le nombre de points que la figure rapporte
 	template <int size, int points> 
@@ -83,31 +91,76 @@ namespace Yahtzee {
 	public:
 		suite(const std::string& name) : figureInferieur(name) {}
 
-		unsigned int eval(lancer* roll) override;
+		unsigned int eval(std::vector<unsigned int>& dicesOccurences) override;
 	};
 
 	template<int size, int points>
-	inline unsigned int suite<size, points>::eval(lancer* roll)
+	inline unsigned int suite<size, points>::eval(std::vector<unsigned int>& dicesOccurences)
 	{
-		std::vector<unsigned int> dicesValues = roll->getDicesValues();
-		int verifications = dicesValues.size() - size + 1;
-		bool found = false;
-		/*a revoir
-		for (int i = 0; i < verifications; ++i) {
-			for (int j = i; j < size; ++j) {
-				if (dicesValues.at(j) != dicesValues.at(j+1) - 1) {
-					found &= false;
-				}
+		
+		int straightLenght = 0;
+		for (unsigned int diceOccurence : dicesOccurences) {
+
+			if (diceOccurence > 0) {
+				straightLenght++;
+			}
+			else {
+				straightLenght = 0; // reboot
+			}
+
+			if (straightLenght == size) {
+				currentPoints = points;
+				return points;
 			}
 		}
 
 		currentPoints = 0;
 		return 0;
-		*/
-		currentPoints = points;
-		return points;
 		
 	}
+
+	// pour plusieurs figures en meme temps
+	// FirstSize   : taille de la premiere figure
+	// FirstSize   : taille de la deuxieme figure
+	// points	   : le nombre de points que la figure rapporte
+	template <int FirstSize, int secondSize, int points>
+	class figuresMultiple : public figureInferieur {
+
+	public:
+		figuresMultiple(const std::string& name) : figureInferieur(name) {}
+
+		unsigned int eval(std::vector<unsigned int>& dicesOccurences) override;
+	};
+
+	
+	template<int FirstSize, int secondSize, int points>
+	inline unsigned int figuresMultiple<FirstSize, secondSize, points>::eval(std::vector<unsigned int>& dicesOccurences)
+	{
+		bool found1 = false;
+		bool found2 = false;
+		unsigned int result = 0;
+		for (unsigned int dice = 1; dice <= dicesOccurences.size(); ++dice) {
+			unsigned int occurenceDice = dicesOccurences.at(dice - 1);
+			result += (occurenceDice * dice);
+			if (occurenceDice == FirstSize ) {
+				found1 = true;
+			}
+			if ( occurenceDice == secondSize) {
+				found2 = true;
+			}
+
+		}
+
+
+		result = (found1 && found2) ? (points > 0 ? points : result) : 0;
+
+
+		currentPoints = result;
+		return result;
+
+
+	}
+
 }
 
 

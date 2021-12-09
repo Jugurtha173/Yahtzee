@@ -14,9 +14,8 @@ namespace Yahtzee {
 		~de() {};
 
 
-		bool operator==(unsigned int v) {
-			return value == v;
-		}
+		bool operator==(unsigned int v) {return value == v;}
+		unsigned int getValue() {return value;}
 
 		friend std::ostream& operator<<(std::ostream& out, const de& dice) {
 			return out 

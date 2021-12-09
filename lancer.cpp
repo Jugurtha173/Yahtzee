@@ -4,11 +4,10 @@
 
 Yahtzee::lancer::lancer()
 {
-	int numberDices = 5;
-	srand(time(nullptr)); // Seed the time
+	srand((unsigned int)time(nullptr)); // Seed the time
 	
 
-	for (int i = 1; i <= numberDices; ++i){
+	for (unsigned int i = 1; i <= numberOfDices; ++i){
 		dices.push_back(new de(i));
 	}
 }
@@ -17,31 +16,31 @@ Yahtzee::lancer::~lancer()
 {
 }
 
-std::vector<unsigned int> Yahtzee::lancer::getDicesValues() const
+std::vector<unsigned int> Yahtzee::lancer::getDicesOccurences() const
 {
-	std::vector<unsigned int> dicesvalues;
+	std::vector<unsigned int> dicesvalues(numberOfFaces, 0);
 	for (de* dice : dices) {
-		dicesvalues.push_back(dice->value);
+		++(dicesvalues.at(dice->value-1));
 	}
 	return dicesvalues;
 }
 
-void Yahtzee::lancer::rollDices()
+std::vector<unsigned int> Yahtzee::lancer::rollDices()
 {
 
 	int min = 1;
-	int max = 6;
 	
-	std::cout << "resulat du jet des des : \n";
+	std::cout << "\nresulat du jet des des : \n";
 
 	for (de* dice : dices) {
 		if (!dice->isHeld) {
-			unsigned int random = (unsigned int)rand() % (max - min + 1) + 1; // Generate the number, assign to variable.
+			unsigned int random = (unsigned int)rand() % (numberOfFaces - min + 1) + 1; // Generate the number, assign to variable.
 			dice->value = random;
 		}
 	}
 	sortDices();
 	showDices();
+	return getDicesOccurences();
 	
 }
 
@@ -67,7 +66,7 @@ void Yahtzee::lancer::holdDicesByIndex(const std::vector<unsigned int>& indexes,
 	}
 
 	for (unsigned int index : indexes) {
-		if (index >= 1 && index <= 5) {
+		if (index >= 1 && index <= numberOfDices) {
 			dices.at(index-1)->isHeld = true;
 		}
 	}

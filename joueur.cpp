@@ -12,10 +12,6 @@ void Yahtzee::joueur::play() const
 {
 	std::string strChoices;
 	for ( unsigned int i = 1; i <= nbrTurns; ++i) {
-        std::cout << "\n";
-
-        // lancer les des
-		roll->rollDices();
 
         // evaluation des figures
         allFiguresEval();
@@ -35,15 +31,16 @@ void Yahtzee::joueur::play() const
             */
         }
         
-
-
-        
 	}
     makeChoice();
 }
 
 void Yahtzee::joueur::allFiguresEval() const
 {
+
+    // lancer les des
+    std::vector<unsigned int> dicesOccurences = roll->rollDices();
+
     std::cout << "Ce que vous pouvez avoir : \n";
     int index = 0;
     for (figure* figure : figures) {
@@ -52,7 +49,7 @@ void Yahtzee::joueur::allFiguresEval() const
             std::cout << "\t" << index << ": "
                 << "\t" << std::setw(10) << std::left 
                 << figure->name<< " : " 
-                << figure->eval(roll) 
+                << figure->eval(dicesOccurences)
                 << std::endl;
         }
     }
@@ -60,7 +57,8 @@ void Yahtzee::joueur::allFiguresEval() const
 
 void Yahtzee::joueur::makeChoice() const
 {
-    std::cout << "Faites votre choix (ex. 1 3 5) : ";
+    std::cout << "*******************************************\n"
+        << "Faites votre choix(ex. 4) : ";
 
     unsigned int choice = getIntInput() - 1;
 
