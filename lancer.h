@@ -15,7 +15,7 @@ namespace Yahtzee {
 	{
 		unsigned int numberOfFaces = 6;
 		unsigned int numberOfDices = 5;
-		std::vector<de*> dices;
+		std::vector<std::shared_ptr<de>> dices;
 
 
 		void sortDices();
@@ -24,13 +24,13 @@ namespace Yahtzee {
 		lancer();
 		~lancer();
 
-		std::vector<de*>& getDices() { return dices; };
+		std::vector<std::shared_ptr<de>>& getDices() { return dices; };
 		std::vector<unsigned int> getDicesOccurences() const ;
 
-		std::vector<unsigned int> rollDices() ;
-		void holdDicesByIndex(const std::vector<unsigned int>& indexes, bool hold = true); // hold ba default
-		void unholdDicesByIndex(const std::vector<unsigned int>& indexes);
-		void unholdAll();
+		void rollAllDices();
+		void rollDices(const std::vector<unsigned int>& indexes);
+		void rollDicesByIndex(const std::vector<unsigned int>& indexes);
+		
 
 		void showDices() const ;
 

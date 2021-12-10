@@ -2,7 +2,7 @@
 
 
 
-unsigned int Yahtzee::chance::eval(std::vector<unsigned int>& dicesOccurences)
+unsigned int Yahtzee::chance::eval(const std::vector<unsigned int>& dicesOccurences)
 {
 	unsigned int sum = 0;
 

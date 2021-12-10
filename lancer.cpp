@@ -1,14 +1,15 @@
 #include "lancer.h"
 
 
-
 Yahtzee::lancer::lancer()
 {
-	srand((unsigned int)time(nullptr)); // Seed the time
+	srand((unsigned int)time(nullptr));
 	
 
 	for (unsigned int i = 1; i <= numberOfDices; ++i){
-		dices.push_back(new de(i));
+		std::shared_ptr<de> dice = std::make_shared<de>(i);
+		dice->roll(numberOfFaces);
+		dices.push_back(dice);
 	}
 }
 
@@ -19,29 +20,40 @@ Yahtzee::lancer::~lancer()
 std::vector<unsigned int> Yahtzee::lancer::getDicesOccurences() const
 {
 	std::vector<unsigned int> dicesvalues(numberOfFaces, 0);
-	for (de* dice : dices) {
+	for (std::shared_ptr<de> dice : dices) {
 		++(dicesvalues.at(dice->value-1));
 	}
 	return dicesvalues;
 }
 
-std::vector<unsigned int> Yahtzee::lancer::rollDices()
+void Yahtzee::lancer::rollAllDices()
+{
+	std::vector<unsigned int> indexes;
+	for (unsigned int i = 1; i <= dices.size(); ++i){
+		indexes.push_back(i);
+	}
+
+	rollDices(indexes);
+}
+
+void Yahtzee::lancer::rollDices(const std::vector<unsigned int>& indexes)
 {
 
-	int min = 1;
-	
-	std::cout << "\nresulat du jet des des : \n";
+	rollDicesByIndex(indexes);
 
-	for (de* dice : dices) {
-		if (!dice->isHeld) {
-			unsigned int random = (unsigned int)rand() % (numberOfFaces - min + 1) + 1; // Generate the number, assign to variable.
-			dice->value = random;
+	sortDices();
+
+	showDices();
+
+}
+
+void Yahtzee::lancer::rollDicesByIndex(const std::vector<unsigned int>& indexes)
+{
+	for (unsigned int index : indexes) {
+		if (index >= 1 && index <= numberOfDices) {
+			dices.at(index - 1)->roll(numberOfFaces);
 		}
 	}
-	sortDices();
-	showDices();
-	return getDicesOccurences();
-	
 }
 
 void Yahtzee::lancer::sortDices() 
@@ -52,46 +64,22 @@ void Yahtzee::lancer::sortDices()
 
 	
 	std::sort(dices.begin(), dices.end(),
-		[]( de* d1, de* d2) {
+		[]( std::shared_ptr<de> d1, std::shared_ptr<de> d2) {
 			return d1->value < d2->value;
 		});
 		
 }
 
-void Yahtzee::lancer::holdDicesByIndex(const std::vector<unsigned int>& indexes, bool hold)
-{
-
-	for (de* dice : dices) {
-		dice->isHeld = false;
-	}
-
-	for (unsigned int index : indexes) {
-		if (index >= 1 && index <= numberOfDices) {
-			dices.at(index-1)->isHeld = true;
-		}
-	}
-
-}
-
-void Yahtzee::lancer::unholdDicesByIndex(const std::vector<unsigned int>& indexes)
-{
-	holdDicesByIndex(indexes, false);
-}
-
-void Yahtzee::lancer::unholdAll()
-{
-	for (de* dice : dices) {
-		dice->isHeld = false;
-	}
-}
-
 void Yahtzee::lancer::showDices() const
 {
+	std::cout
+		<< "\n**********************************************\n"
+		<< "resulat du jet des des : \n";
+
 	int i = 0;
-	for (de* dice : dices) {
+	for (std::shared_ptr<de> dice : dices) {
 		std::cout << "\t" << ++i << ":\t" << *dice << "\n";
 		
 	}
 	std::cout << std::endl;
 }
-

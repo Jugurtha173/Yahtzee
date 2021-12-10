@@ -13,10 +13,10 @@ namespace Yahtzee {
 
 	class partie
 	{
-		std::vector<joueur*> players;
+		std::vector<std::shared_ptr<joueur>> players;
 		unsigned int numberPlayers;
 		std::vector<figure*> figures;
-		lancer* roll;
+		std::shared_ptr<lancer> roll;
 
 	public:
 		partie(int numberPlayers = 2);

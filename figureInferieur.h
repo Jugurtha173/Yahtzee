@@ -27,7 +27,7 @@ namespace Yahtzee {
 	public:
 		chance() : figureInferieur("Chance") {}
 
-		unsigned int eval(std::vector<unsigned int>& dicesOccurences) override;
+		unsigned int eval(const std::vector<unsigned int>& dicesOccurences) override;
 	
 	};
 
@@ -41,11 +41,11 @@ namespace Yahtzee {
 	public:
 		identical(const std::string& name) : figureInferieur(name) {}
 
-		unsigned int eval(std::vector<unsigned int>& dicesOccurences) override;
+		unsigned int eval(const std::vector<unsigned int>& dicesOccurences) override;
 	};
 
 	template<int size, int points>
-	inline unsigned int identical<size, points>::eval(std::vector<unsigned int>& dicesOccurences)
+	inline unsigned int identical<size, points>::eval(const std::vector<unsigned int>& dicesOccurences)
 	{
 		/*
 		int verifications = dicesValues.size() - size + 1;
@@ -91,11 +91,11 @@ namespace Yahtzee {
 	public:
 		suite(const std::string& name) : figureInferieur(name) {}
 
-		unsigned int eval(std::vector<unsigned int>& dicesOccurences) override;
+		unsigned int eval(const std::vector<unsigned int>& dicesOccurences) override;
 	};
 
 	template<int size, int points>
-	inline unsigned int suite<size, points>::eval(std::vector<unsigned int>& dicesOccurences)
+	inline unsigned int suite<size, points>::eval(const std::vector<unsigned int>& dicesOccurences)
 	{
 		
 		int straightLenght = 0;
@@ -129,12 +129,12 @@ namespace Yahtzee {
 	public:
 		figuresMultiple(const std::string& name) : figureInferieur(name) {}
 
-		unsigned int eval(std::vector<unsigned int>& dicesOccurences) override;
+		unsigned int eval(const std::vector<unsigned int>& dicesOccurences) override;
 	};
 
 	
 	template<int FirstSize, int secondSize, int points>
-	inline unsigned int figuresMultiple<FirstSize, secondSize, points>::eval(std::vector<unsigned int>& dicesOccurences)
+	inline unsigned int figuresMultiple<FirstSize, secondSize, points>::eval(const std::vector<unsigned int>& dicesOccurences)
 	{
 		bool found1 = false;
 		bool found2 = false;

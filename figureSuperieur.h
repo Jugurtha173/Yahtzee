@@ -12,7 +12,7 @@ namespace Yahtzee {
 	public:
 		figureSuperieur(const std::string& name, unsigned int value) : figure(name), value(value) {};
 		~figureSuperieur() {};
-		unsigned int eval(std::vector<unsigned int>& dicesOccurences) override;
+		unsigned int eval(const std::vector<unsigned int>& dicesOccurences) override;
 
 	};
 }

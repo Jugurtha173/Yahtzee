@@ -1,55 +1,55 @@
 #include "joueur.h"
 #include <iomanip>
 
-Yahtzee::joueur::joueur(std::string name, lancer* roll, std::vector<figure*> figures) :
+Yahtzee::joueur::joueur(std::string name, std::shared_ptr<lancer> roll, std::vector<std::shared_ptr<figure>> figures) :
     name(name), roll(roll), figures(figures)
 {
 
 };
 
-
 void Yahtzee::joueur::play() const 
 {
+    roll->rollAllDices();
 	std::string strChoices;
 	for ( unsigned int i = 1; i <= nbrTurns; ++i) {
 
+
         // evaluation des figures
-        allFiguresEval();
+        evalFigures();
 
         if (i < nbrTurns) {
             // hold
-            std::cout << "Selectionez les indices des des a GARDER (ex. 1 3 5) : ";
+            std::cout 
+                << "\n**********************************************\n"
+                << "Selectionez les indices des des a RELANCER\n" <<
+                "(ex. 1 3 5) | (Entrer pour faire un choix): ";
+
             std::getline(std::cin, strChoices);
-            std::vector<unsigned int> holdIndexes = extractInts(strChoices);
-            roll->holdDicesByIndex(holdIndexes);
-            /*
-            // unhold
-            std::cout << "Selectionez les indices des des a RELACHER (ex. 1 3 5) : ";
-            std::getline(std::cin, strChoices);
-            std::vector<unsigned int> unholdIndexes = extractInts(strChoices);
-            roll->unholdDicesByIndex(unholdIndexes);
-            */
+            if (strChoices.empty()) break;
+            std::vector<unsigned int> indexes = extractInts(strChoices);
+            roll->rollDices(indexes);
         }
-        
 	}
     makeChoice();
 }
 
-void Yahtzee::joueur::allFiguresEval() const
+void Yahtzee::joueur::evalFigures() const
 {
 
     // lancer les des
-    std::vector<unsigned int> dicesOccurences = roll->rollDices();
+    std::vector<unsigned int> dicesOccurences = roll->getDicesOccurences();
 
     std::cout << "Ce que vous pouvez avoir : \n";
     int index = 0;
-    for (figure* figure : figures) {
+    for (std::shared_ptr<figure> figure : figures) {
         ++index;
         if (!figure->isUsed()) {
+            unsigned int resultEval = figure->eval(dicesOccurences);
+
             std::cout << "\t" << index << ": "
-                << "\t" << std::setw(10) << std::left 
+                << "\t" << std::setw(10) << std::left
                 << figure->name<< " : " 
-                << figure->eval(dicesOccurences)
+                << resultEval
                 << std::endl;
         }
     }
@@ -57,8 +57,9 @@ void Yahtzee::joueur::allFiguresEval() const
 
 void Yahtzee::joueur::makeChoice() const
 {
-    std::cout << "*******************************************\n"
-        << "Faites votre choix(ex. 4) : ";
+    std::cout 
+        << "\n*******************************************\n"
+        << "Faites votre choix par indice (ex. 4) : ";
 
     unsigned int choice = getIntInput() - 1;
 
@@ -66,7 +67,7 @@ void Yahtzee::joueur::makeChoice() const
     figures.at(choice)->used = true;
 
     // reset figures
-    for (figure* figure : figures) {
+    for (std::shared_ptr<figure> figure : figures) {
         if (!figure->isUsed()) {
             figure->currentPoints = 0;
         }
@@ -101,7 +102,7 @@ unsigned int Yahtzee::joueur::getIntInput() const
 bool Yahtzee::joueur::hasFinished() const
 {
     // si il y a encore une figure non utilisee, alors le joueur n'a pas fini
-    for (figure* figure : figures) {
+    for (std::shared_ptr<figure> figure : figures) {
         if (!figure->isUsed()) {
             return false;
         }
@@ -114,26 +115,22 @@ std::vector<unsigned int> Yahtzee::joueur::extractInts(std::string str) const
     std::vector<unsigned int> choices;
     std::stringstream ss;
 
-    /* Storing the whole string into string stream */
     ss << str;
 
-    /* Running loop till the end of the stream */
     std::string temp;
     unsigned int found;
     while (!ss.eof()) {
 
-        /* extracting word by word from stream */
         ss >> temp;
 
-        /* Checking the given word is integer or not */
         if (std::stringstream(temp) >> found)
             choices.push_back(found);
 
-        /* To save from space at the end of string */
         temp = "";
 
     }
 
     return choices;
+    return { 1, 2 };
 }
 

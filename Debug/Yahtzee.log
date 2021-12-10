@@ -1,6 +1,2 @@
-﻿  Yahtzee.cpp
-  figureInferieur.cpp
-  figuresJeu.cpp
-  partie.cpp
-  Generating Code...
+﻿  joueur.cpp
   Yahtzee.vcxproj -> E:\M1\COO\Projet\Yahtzee\Debug\Yahtzee.exe

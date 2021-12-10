@@ -1,13 +1,13 @@
 #include "partie.h"
 #include <iomanip>
+#include <memory>
 
 Yahtzee::partie::partie(int numberPlayers)
 {
 	// verif inferieur a 2
-	this->numberPlayers = numberPlayers;
+	this->numberPlayers = (numberPlayers < 2) ?  2 : numberPlayers;
 
-	// lancer to delete
-	this->roll = new lancer();
+	this->roll = std::make_shared<lancer>();
 
 	initPlayers();
 }
@@ -20,7 +20,8 @@ void Yahtzee::partie::initPlayers()
 {
 	for (unsigned int i = 1; i <= numberPlayers; ++i) {
 		// to delete
-		joueur* player = new joueur("Joueur #" + std::to_string(i), roll, figuresJeu::getFigures());
+		std::shared_ptr<joueur> player = std::make_shared<joueur>("Joueur #" + std::to_string(i), roll, figuresJeu::getFigures());
+		//joueur* player = new joueur("Joueur #" + std::to_string(i), roll, figuresJeu::getFigures());
 		players.push_back(player);
 
 	}
@@ -33,7 +34,7 @@ void Yahtzee::partie::launch()
 	unsigned int numberFinishedPlayers = 0;
 
 	while (numberFinishedPlayers < numberPlayers) {
-		for (joueur* player : players) {
+		for (std::shared_ptr<joueur> player : players) {
 
 			std::cout 
 				<< "**********************************************"<< std::endl
@@ -41,7 +42,6 @@ void Yahtzee::partie::launch()
 				<< "**********************************************"<< std::endl;
 
 			player->play();
-			roll->unholdAll();
 			showTable();
 			if (player->hasFinished()) {
 				numberFinishedPlayers++;
@@ -64,7 +64,7 @@ void Yahtzee::partie::showTable() const
 	
 
 	std::cout << std::setw(sizeOfCell) << "Yahtzee" << std::setw(sizeOfCell) << "|";
-	for (joueur* player : players) {
+	for (std::shared_ptr<joueur> player : players) {
 		std::cout << std::setw(sizeOfCell) << player->name << std::setw(sizeOfCell) << "|";
 	}
 	separate(sizeOfRow);

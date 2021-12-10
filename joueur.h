@@ -20,16 +20,15 @@ namespace Yahtzee {
 		unsigned int totalSup = 0;
 		unsigned int totalInf = 0;
 		const std::string name;
-		std::vector<figure*> figures;
-		lancer* roll;
+		std::vector<std::shared_ptr<figure>> figures;
+		std::shared_ptr<lancer> roll;
 
 	public:
-		joueur(std::string name,  lancer* roll, std::vector<figure*> figures);
-		~joueur() { delete roll; };
+		joueur(std::string name,  std::shared_ptr<lancer> roll, std::vector<std::shared_ptr<figure>> figures);
+		~joueur() { };
 
 		void play() const ;
-		void allFiguresEval() const ;
-		//void holdDices(const std::vector<unsigned int>& choices);
+		void evalFigures() const ;
 
 		void makeChoice() const ;
 		unsigned int getIntInput() const ;

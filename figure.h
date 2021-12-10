@@ -19,7 +19,7 @@ namespace Yahtzee {
 		virtual ~figure() {};
 
 		bool isUsed() { return used; };
-		virtual unsigned int eval(std::vector<unsigned int>& dicesOccurences) = 0;
+		virtual unsigned int eval(const std::vector<unsigned int>& dicesOccurences) = 0;
 
 		friend std::ostream& operator<<(std::ostream& out, const figure& figure) {
 			return out << (figure.playerPoints == -1 ? "_" : std::to_string(figure.playerPoints)) ;
