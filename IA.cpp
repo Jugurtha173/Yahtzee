@@ -1,9 +1,7 @@
 #include "IA.h"
-#include <thread>
-#include <chrono>
 
 
-std::string Yahtzee::IA::getChoice() const
+std::string Yahtzee::IA::chooseDicesToRoll() const
 {
 	std::string strChoices;
 
@@ -15,7 +13,11 @@ std::string Yahtzee::IA::getChoice() const
 
 	std::cout << name << " choose : " << strChoices << std::endl;
 
-	std::this_thread::sleep_for(std::chrono::seconds(2));
+	std::this_thread::sleep_for(std::chrono::seconds(1));
 
 	return strChoices;
 }
+
+
+
+

@@ -6,7 +6,7 @@
 Yahtzee::partie::partie(int numberPlayers)
 {
 	// verif inferieur a 2
-	this->numberPlayers = (numberPlayers < 2) ?  2 : numberPlayers;
+	this->numberPlayers = (numberPlayers < 2) ? 2 : numberPlayers;
 
 	this->roll = std::make_shared<lancer>();
 
@@ -59,18 +59,17 @@ void Yahtzee::partie::launch()
 
 void Yahtzee::partie::showTable() const
 {
-
 	unsigned int numberFigures = players.at(0)->figures.size();
 	int sizeOfCell = 10;
 	int sizeOfRow = sizeOfCell + (2 * sizeOfCell * numberPlayers);
 
 	separate(sizeOfRow);
-	
 
 	std::cout << std::setw(sizeOfCell) << "Yahtzee" << std::setw(sizeOfCell) << "|";
 	for (std::shared_ptr<joueur> player : players) {
-		std::cout << std::setw(sizeOfCell) << player << std::setw(sizeOfCell) << "|";
+		std::cout << std::setw(sizeOfCell) << player->name << std::setw(sizeOfCell) << "|";
 	}
+	
 	separate(sizeOfRow);
 
 	for (unsigned int i = 0; i < numberFigures; ++i) {
@@ -86,7 +85,14 @@ void Yahtzee::partie::showTable() const
 		separate(sizeOfRow);
 	}
 
-	std::cout << "\n";
+	std::cout << std::setw(sizeOfCell) << "TOTAL" << std::setw(sizeOfCell) << "|";
+	for (std::shared_ptr<joueur> player : players) {
+		std::cout << std::setw(sizeOfCell) << player->getTotalPoints() << std::setw(sizeOfCell) << "|";
+	}
+
+	separate(sizeOfRow);
+	std::cout << "\n\n";
+
 }
 
 void Yahtzee::partie::showScores()

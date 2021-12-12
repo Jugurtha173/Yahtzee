@@ -24,7 +24,7 @@ void Yahtzee::joueur::play() const
                 << "Selectionez les indices des des a RELANCER\n" <<
                 "(ex. 1 3 5) | (Entrer pour faire un choix): ";
 
-            strChoices = getChoice(); // std::getline(std::cin, strChoices);
+            strChoices = chooseDicesToRoll(); // std::getline(std::cin, strChoices);
             if (strChoices.empty()) break;
             std::vector<unsigned int> indexes = extractInts(strChoices);
             roll->rollDices(indexes);
@@ -32,7 +32,7 @@ void Yahtzee::joueur::play() const
 	}
 }
 
-std::string Yahtzee::joueur::getChoice() const
+std::string Yahtzee::joueur::chooseDicesToRoll() const
 {
     std::string strChoices;
     std::getline(std::cin, strChoices);
@@ -41,7 +41,6 @@ std::string Yahtzee::joueur::getChoice() const
 
 void Yahtzee::joueur::evalFigures() const
 {
-
     // lancer les des
     std::vector<unsigned int> dicesOccurences = roll->getDicesOccurences();
 
@@ -52,7 +51,7 @@ void Yahtzee::joueur::evalFigures() const
         if (!figure->isUsed()) {
             unsigned int resultEval = figure->eval(dicesOccurences);
 
-            std::cout << "\t" << index << ": "
+            std::cout
                 << "\t" << std::setw(10) << std::left
                 << figure->name<< " : " 
                 << resultEval
@@ -61,18 +60,18 @@ void Yahtzee::joueur::evalFigures() const
     }
 }
 
+
 void Yahtzee::joueur::makeChoice()
 {
     std::cout 
         << "\n*******************************************\n"
-        << "Faites votre choix par indice (ex. 4) : ";
+        << "Faites votre choix par nom (ex. Petite S) : ";
 
-    unsigned int choice = getIntInput() - 1;
-
-    std::shared_ptr<figure> choosenFigure = figures.at(choice);
+    std::shared_ptr<figure> choosenFigure = chooseFigure();
 
     choosenFigure->playerPoints = choosenFigure->currentPoints;
     choosenFigure->used = true;
+    choosenFigure->currentPoints = 0;
 
     if (std::dynamic_pointer_cast<figureSuperieur>(choosenFigure) != nullptr) {
         this->totalSup += choosenFigure->currentPoints;
@@ -86,7 +85,6 @@ void Yahtzee::joueur::makeChoice()
     }
     else {
         this->totalInf += choosenFigure->currentPoints;
-
     }
 
     // reset figures
@@ -95,32 +93,6 @@ void Yahtzee::joueur::makeChoice()
             figure->currentPoints = 0;
         }
     }
-
-}
-
-unsigned int Yahtzee::joueur::getIntInput() const 
-{
-    std::string strChoice;
-    strChoice = getChoice();
-    //std::getline(std::cin, strChoice);
-    unsigned int input;
-    
-    try {
-
-        input = extractInts(strChoice).at(0);
-    }
-    catch (std::exception e) {
-        std::cout << "\nSaisir une valeur entiere (indice) : ";
-        return getIntInput();
-    }
-
-    if (input < 1 || input > figures.size()) {
-        std::cout << "\nSaisir une valeur entiere entre 1 et " << figures.size() <<" : ";
-        return getIntInput();
-
-    }
-    
-    return input;
 }
 
 unsigned int Yahtzee::joueur::getTotalPoints() const
@@ -160,6 +132,14 @@ std::vector<unsigned int> Yahtzee::joueur::extractInts(std::string str) const
     }
 
     return choices;
-    return { 1, 2 };
 }
 
+std::ostream& Yahtzee::operator<<(std::ostream& out, const joueur& player)
+{
+    return out << player.name << " (" << player.getTotalPoints() << ")";
+}
+
+std::ostream& Yahtzee::operator<<(std::ostream& out, const std::shared_ptr<joueur> player)
+{
+    return out << player->name;
+}

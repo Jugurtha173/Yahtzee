@@ -18,16 +18,19 @@ namespace Yahtzee {
 		figure(const std::string& name) : name(name) {};
 		virtual ~figure() {};
 
-		bool isUsed() { return used; };
+		const std::string getName();
+		bool isUsed();
+
 		virtual unsigned int eval(const std::vector<unsigned int>& dicesOccurences) = 0;
 
-		friend std::ostream& operator<<(std::ostream& out, const figure& figure) {
-			return out << (figure.playerPoints == -1 ? "_" : std::to_string(figure.playerPoints)) ;
-		};
+		friend std::ostream& operator<<(std::ostream& out, const figure& figure);
+		bool operator<=(const figure& figure);
 
 		friend class partie;
 		friend class joueur;
 	};
+
+	std::ostream& operator<<(std::ostream& out, const figure& figure);
 
 }
 
