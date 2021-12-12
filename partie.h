@@ -5,6 +5,7 @@
 
 
 #include "joueur.h"
+#include "IA.h"
 #include "lancer.h"
 #include "figure.h"
 #include "figuresJeu.h"

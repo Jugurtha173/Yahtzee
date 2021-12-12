@@ -14,6 +14,7 @@ namespace Yahtzee {
 
 	class joueur
 	{
+	protected:
 		//
 		const static unsigned int nbrTurns = 3;
 		//
@@ -27,8 +28,10 @@ namespace Yahtzee {
 		joueur(std::string name,  std::shared_ptr<lancer> roll, std::vector<std::shared_ptr<figure>> figures);
 		virtual ~joueur() { };
 
-		virtual void play() const;
+		void play() const;
+		virtual std::string getChoice() const;
 		void evalFigures() const;
+
 
 		void makeChoice();
 		unsigned int getIntInput() const;

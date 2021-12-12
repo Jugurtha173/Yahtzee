@@ -24,12 +24,19 @@ void Yahtzee::joueur::play() const
                 << "Selectionez les indices des des a RELANCER\n" <<
                 "(ex. 1 3 5) | (Entrer pour faire un choix): ";
 
-            std::getline(std::cin, strChoices);
+            strChoices = getChoice(); // std::getline(std::cin, strChoices);
             if (strChoices.empty()) break;
             std::vector<unsigned int> indexes = extractInts(strChoices);
             roll->rollDices(indexes);
         }
 	}
+}
+
+std::string Yahtzee::joueur::getChoice() const
+{
+    std::string strChoices;
+    std::getline(std::cin, strChoices);
+    return strChoices;
 }
 
 void Yahtzee::joueur::evalFigures() const
@@ -94,7 +101,8 @@ void Yahtzee::joueur::makeChoice()
 unsigned int Yahtzee::joueur::getIntInput() const 
 {
     std::string strChoice;
-    std::getline(std::cin, strChoice);
+    strChoice = getChoice();
+    //std::getline(std::cin, strChoice);
     unsigned int input;
     
     try {

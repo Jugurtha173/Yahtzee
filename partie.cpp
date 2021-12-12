@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <memory>
 
+
 Yahtzee::partie::partie(int numberPlayers)
 {
 	// verif inferieur a 2
@@ -18,10 +19,11 @@ Yahtzee::partie::~partie()
 
 void Yahtzee::partie::initPlayers()
 {
-	for (unsigned int i = 1; i <= numberPlayers; ++i) {
-		// to delete
-		std::shared_ptr<joueur> player = std::make_shared<joueur>("J #" + std::to_string(i), roll, figuresJeu::getFigures());
-		//joueur* player = new joueur("Joueur #" + std::to_string(i), roll, figuresJeu::getFigures());
+	std::shared_ptr<joueur> player = std::make_shared<joueur>("J #1", roll, figuresJeu::getFigures());
+	players.push_back(player);
+
+	for (unsigned int i = 2; i <= numberPlayers; ++i) {
+		std::shared_ptr<IA> player = std::make_shared<IA>("IA #" + std::to_string(i), roll, figuresJeu::getFigures());
 		players.push_back(player);
 
 	}
