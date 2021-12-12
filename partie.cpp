@@ -20,7 +20,7 @@ void Yahtzee::partie::initPlayers()
 {
 	for (unsigned int i = 1; i <= numberPlayers; ++i) {
 		// to delete
-		std::shared_ptr<joueur> player = std::make_shared<joueur>("Joueur #" + std::to_string(i), roll, figuresJeu::getFigures());
+		std::shared_ptr<joueur> player = std::make_shared<joueur>("J #" + std::to_string(i), roll, figuresJeu::getFigures());
 		//joueur* player = new joueur("Joueur #" + std::to_string(i), roll, figuresJeu::getFigures());
 		players.push_back(player);
 
@@ -42,6 +42,7 @@ void Yahtzee::partie::launch()
 				<< "**********************************************"<< std::endl;
 
 			player->play();
+			player->makeChoice();
 			showTable();
 			if (player->hasFinished()) {
 				numberFinishedPlayers++;
@@ -50,6 +51,7 @@ void Yahtzee::partie::launch()
 		}
 	}
 	
+	showScores();
 
 }
 
@@ -65,7 +67,7 @@ void Yahtzee::partie::showTable() const
 
 	std::cout << std::setw(sizeOfCell) << "Yahtzee" << std::setw(sizeOfCell) << "|";
 	for (std::shared_ptr<joueur> player : players) {
-		std::cout << std::setw(sizeOfCell) << player->name << std::setw(sizeOfCell) << "|";
+		std::cout << std::setw(sizeOfCell) << player << std::setw(sizeOfCell) << "|";
 	}
 	separate(sizeOfRow);
 
@@ -83,6 +85,42 @@ void Yahtzee::partie::showTable() const
 	}
 
 	std::cout << "\n";
+}
+
+void Yahtzee::partie::showScores()
+{
+
+	std::sort(players.begin(), players.end(),
+		[](const std::shared_ptr<joueur>& p1, const std::shared_ptr<joueur>& p2) {
+			return p1->getTotalPoints() > p2->getTotalPoints();
+		}
+	);
+	
+	int size = 12;
+	
+	for (unsigned int i = 0; i < players.size(); ++i) {
+
+		for (unsigned int j = 0; j < i; ++j) {
+			std::cout << std::setw(size) << "|";
+		}
+
+		std::cout << "|  " << std::setw(size) << players.at(i) << "\n";
+
+
+		for (unsigned int j = 0; j < i; ++j) {
+			std::cout << std::setw(size) << "|";
+		}
+		std::cout << "|-----------|\n";
+		
+	}
+
+	for (unsigned int i = 0; i < players.size(); ++i) {
+		std::cout << "------------";
+
+	}
+	std::cout << "|";
+
+	
 }
 
 void Yahtzee::partie::separate(int sizeOfRow) const

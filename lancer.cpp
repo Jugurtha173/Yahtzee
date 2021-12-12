@@ -58,13 +58,9 @@ void Yahtzee::lancer::rollDicesByIndex(const std::vector<unsigned int>& indexes)
 
 void Yahtzee::lancer::sortDices() 
 {
-	//std::sort((&dices)->begin(), (&dices)->end());
-
-
-
 	
 	std::sort(dices.begin(), dices.end(),
-		[]( std::shared_ptr<de> d1, std::shared_ptr<de> d2) {
+		[](const std::shared_ptr<de>& d1, const std::shared_ptr<de>& d2) {
 			return d1->value < d2->value;
 		});
 		

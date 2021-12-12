@@ -8,6 +8,8 @@
 #include <time.h> 
 
 #include "de.h"
+#include <iostream>
+
 
 namespace Yahtzee {
 

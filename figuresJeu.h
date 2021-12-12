@@ -17,9 +17,9 @@ namespace Yahtzee {
 			std::vector<std::shared_ptr<figure>> figures;
 
 			figures.push_back(std::make_shared<figureSuperieur>("As", 1));
-			figures.push_back(std::make_shared<figureSuperieur>("Deux", 2));
+			/*figures.push_back(std::make_shared<figureSuperieur>("Deux", 2));
 			figures.push_back(std::make_shared<figureSuperieur>("Trois", 3));
-			figures.push_back(std::make_shared<figureSuperieur>("Quatre", 4));
+			/*figures.push_back(std::make_shared<figureSuperieur>("Quatre", 4));
 			figures.push_back(std::make_shared<figureSuperieur>("Cinq", 5));
 			figures.push_back(std::make_shared<figureSuperieur>("Six", 6));
 
@@ -31,7 +31,7 @@ namespace Yahtzee {
 			figures.push_back(std::make_shared<identical<4>>("Carre"));
 			figures.push_back(std::make_shared<identical<5, 50>>("Yahtzee"));
 			figures.push_back(std::make_shared<chance>());
-
+			*/
 			return figures;
 		}
 	};

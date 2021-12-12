@@ -30,7 +30,6 @@ void Yahtzee::joueur::play() const
             roll->rollDices(indexes);
         }
 	}
-    makeChoice();
 }
 
 void Yahtzee::joueur::evalFigures() const
@@ -55,7 +54,7 @@ void Yahtzee::joueur::evalFigures() const
     }
 }
 
-void Yahtzee::joueur::makeChoice() const
+void Yahtzee::joueur::makeChoice()
 {
     std::cout 
         << "\n*******************************************\n"
@@ -63,8 +62,25 @@ void Yahtzee::joueur::makeChoice() const
 
     unsigned int choice = getIntInput() - 1;
 
-    figures.at(choice)->playerPoints = figures.at(choice)->currentPoints;
-    figures.at(choice)->used = true;
+    std::shared_ptr<figure> choosenFigure = figures.at(choice);
+
+    choosenFigure->playerPoints = choosenFigure->currentPoints;
+    choosenFigure->used = true;
+
+    if (std::dynamic_pointer_cast<figureSuperieur>(choosenFigure) != nullptr) {
+        this->totalSup += choosenFigure->currentPoints;
+        if (totalSup >= 63) {
+            totalSup += 35;
+            std::cout
+                << "*********************************************************************************\n"
+                << "*************************** PRIME OBTENU (+35 points) ***************************\n"
+                << "*********************************************************************************\n";
+        }
+    }
+    else {
+        this->totalInf += choosenFigure->currentPoints;
+
+    }
 
     // reset figures
     for (std::shared_ptr<figure> figure : figures) {
@@ -97,6 +113,11 @@ unsigned int Yahtzee::joueur::getIntInput() const
     }
     
     return input;
+}
+
+unsigned int Yahtzee::joueur::getTotalPoints() const
+{
+    return totalInf + totalSup;
 }
 
 bool Yahtzee::joueur::hasFinished() const
