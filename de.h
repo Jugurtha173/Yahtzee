@@ -11,7 +11,7 @@ namespace Yahtzee {
 
 	public:
 		de(unsigned int value) : value(value), isHeld(false) {};
-		~de() {};
+		~de() = default;
 
 
 		bool operator==(unsigned int v) {return value == v;}
@@ -25,6 +25,8 @@ namespace Yahtzee {
 		};
 		friend class lancer;
 	};
+
+	typedef std::shared_ptr<de> dePtr;
 
 }
 

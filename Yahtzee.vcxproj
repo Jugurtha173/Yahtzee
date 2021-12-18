@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="brelan.cpp" />
     <ClCompile Include="de.cpp" />
     <ClCompile Include="figure.cpp" />
     <ClCompile Include="figureInferieur.cpp" />
@@ -152,7 +151,6 @@
     <ClCompile Include="Yahtzee.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="brelan.h" />
     <ClInclude Include="de.h" />
     <ClInclude Include="figure.h" />
     <ClInclude Include="figureInferieur.h" />

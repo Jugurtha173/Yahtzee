@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="brelan.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="de.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -50,9 +47,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="brelan.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="de.h">
       <Filter>Header Files</Filter>
     </ClInclude>

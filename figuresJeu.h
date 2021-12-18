@@ -12,9 +12,9 @@ namespace Yahtzee {
 
 	public:
 
-		static std::vector<std::shared_ptr<figure>> getFigures() {
+		static std::vector<figurePtr> getFigures() {
 
-			std::vector<std::shared_ptr<figure>> figures;
+			std::vector<figurePtr> figures;
 
 			figures.push_back(std::make_shared<figureSuperieur>("As", 1));
 			figures.push_back(std::make_shared<figureSuperieur>("Deux", 2));

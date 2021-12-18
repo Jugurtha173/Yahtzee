@@ -18,15 +18,15 @@ namespace Yahtzee {
 		static int NUMBER_OF_PLAYERS;
 		static int NUMBER_OF_FACES;
 
-		std::vector<std::shared_ptr<joueur>> players;
+		std::vector<joueurPtr> players;
 		unsigned int numberPlayers;
 		std::vector<figure*> figures;
-		std::shared_ptr<lancer> roll;
+		lancerPtr roll;
 
 	public:
 
 		partie(int numberPlayers = 2);
-		~partie();
+		~partie() = default;
 
 		void initPlayers();
 		void launch();

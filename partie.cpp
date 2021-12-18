@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <memory>
 
-
 Yahtzee::partie::partie(int numberPlayers)
 {
 	// verif inferieur a 2
@@ -13,18 +12,14 @@ Yahtzee::partie::partie(int numberPlayers)
 	initPlayers();
 }
 
-Yahtzee::partie::~partie()
-{
-}
-
 void Yahtzee::partie::initPlayers()
 {
-	std::shared_ptr<joueur> player = std::make_shared<joueur>("J #1", roll, figuresJeu::getFigures());
+	joueurPtr player = std::make_shared<joueur>("J #1", roll, figuresJeu::getFigures());
 	players.push_back(player);
 
 	for (unsigned int i = 2; i <= numberPlayers; ++i) {
-		std::shared_ptr<IA> player = std::make_shared<IA>("IA #" + std::to_string(i), roll, figuresJeu::getFigures());
-		players.push_back(player);
+		joueurPtr IAplayer = std::make_shared<IA>("IA #" + std::to_string(i), roll, figuresJeu::getFigures());
+		players.push_back(IAplayer);
 
 	}
 }
@@ -36,11 +31,11 @@ void Yahtzee::partie::launch()
 	unsigned int numberFinishedPlayers = 0;
 
 	while (numberFinishedPlayers < numberPlayers) {
-		for (std::shared_ptr<joueur> player : players) {
+		for (joueurPtr player : players) {
 
 			std::cout 
 				<< "**********************************************"<< std::endl
-				<< "\tTour de : " << *player << std::endl
+				<< "\tTour de : " << player->name << std::endl
 				<< "**********************************************"<< std::endl;
 
 			player->play();
@@ -49,12 +44,10 @@ void Yahtzee::partie::launch()
 			if (player->hasFinished()) {
 				numberFinishedPlayers++;
 			}
-
 		}
 	}
 	
 	showScores();
-
 }
 
 void Yahtzee::partie::showTable() const
@@ -66,7 +59,7 @@ void Yahtzee::partie::showTable() const
 	separate(sizeOfRow);
 
 	std::cout << std::setw(sizeOfCell) << "Yahtzee" << std::setw(sizeOfCell) << "|";
-	for (std::shared_ptr<joueur> player : players) {
+	for (joueurPtr player : players) {
 		std::cout << std::setw(sizeOfCell) << player->name << std::setw(sizeOfCell) << "|";
 	}
 	
@@ -86,7 +79,7 @@ void Yahtzee::partie::showTable() const
 	}
 
 	std::cout << std::setw(sizeOfCell) << "TOTAL" << std::setw(sizeOfCell) << "|";
-	for (std::shared_ptr<joueur> player : players) {
+	for (joueurPtr player : players) {
 		std::cout << std::setw(sizeOfCell) << player->getTotalPoints() << std::setw(sizeOfCell) << "|";
 	}
 
@@ -99,7 +92,7 @@ void Yahtzee::partie::showScores()
 {
 
 	std::sort(players.begin(), players.end(),
-		[](const std::shared_ptr<joueur>& p1, const std::shared_ptr<joueur>& p2) {
+		[](const joueurPtr& p1, const joueurPtr& p2) {
 			return p1->getTotalPoints() > p2->getTotalPoints();
 		}
 	);
@@ -112,7 +105,7 @@ void Yahtzee::partie::showScores()
 			std::cout << std::setw(size) << "|";
 		}
 
-		std::cout << "|  " << std::setw(size) << players.at(i) << "\n";
+		std::cout << "|  " << std::setw(size) << players.at(i)->name << "\n";
 
 
 		for (unsigned int j = 0; j < i; ++j) {

@@ -9,7 +9,7 @@ namespace Yahtzee {
 
 	public:
 		figureInferieur(const std::string& name) : figure(name) {}
-		~figureInferieur() {}
+		~figureInferieur() = default;
 
 	};
 
@@ -26,7 +26,7 @@ namespace Yahtzee {
 	{
 	public:
 		chance() : figureInferieur("Chance") {}
-
+		~chance() = default;
 		unsigned int eval(const std::vector<unsigned int>& dicesOccurences) override;
 	
 	};
@@ -47,6 +47,19 @@ namespace Yahtzee {
 	template<int size, int points>
 	inline unsigned int identical<size, points>::eval(const std::vector<unsigned int>& dicesOccurences)
 	{
+		bool found = false;
+		unsigned int result = 0;
+		for (unsigned int dice = 1; dice <= dicesOccurences.size(); ++dice ) {
+			unsigned int occurenceDice = dicesOccurences.at(dice-1);
+			if (occurenceDice == size) {
+				found = true;
+			}
+			result += (occurenceDice * dice);
+		}
+
+		result = found ? ( points > 0 ? points : result) : 0	; 
+		return result;
+
 		/*
 		int verifications = dicesValues.size() - size + 1;
 
@@ -60,25 +73,6 @@ namespace Yahtzee {
 			}
 		}
 		*/
-
-
-		bool found = false;
-		unsigned int result = 0;
-		for (unsigned int dice = 1; dice <= dicesOccurences.size(); ++dice ) {
-			unsigned int occurenceDice = dicesOccurences.at(dice-1);
-			if (occurenceDice == size) {
-				found = true;
-			}
-			result += (occurenceDice * dice);
-		}
-
-		
-		result = found ? ( points > 0 ? points : result) : 0	; 
-		
-
-		currentPoints = result;
-		return result;
-
 	}
 
 
@@ -97,7 +91,6 @@ namespace Yahtzee {
 	template<int size, int points>
 	inline unsigned int suite<size, points>::eval(const std::vector<unsigned int>& dicesOccurences)
 	{
-		
 		int straightLenght = 0;
 		for (unsigned int diceOccurence : dicesOccurences) {
 
@@ -109,14 +102,10 @@ namespace Yahtzee {
 			}
 
 			if (straightLenght == size) {
-				currentPoints = points;
 				return points;
 			}
 		}
-
-		currentPoints = 0;
 		return 0;
-		
 	}
 
 	// pour plusieurs figures en meme temps
@@ -145,20 +134,14 @@ namespace Yahtzee {
 			if (occurenceDice == FirstSize ) {
 				found1 = true;
 			}
+
 			if ( occurenceDice == secondSize) {
 				found2 = true;
 			}
-
 		}
 
-
 		result = (found1 && found2) ? (points > 0 ? points : result) : 0;
-
-
-		currentPoints = result;
 		return result;
-
-
 	}
 
 }

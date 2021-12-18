@@ -5,22 +5,17 @@ Yahtzee::lancer::lancer()
 {
 	srand((unsigned int)time(nullptr));
 	
-
 	for (unsigned int i = 1; i <= numberOfDices; ++i){
-		std::shared_ptr<de> dice = std::make_shared<de>(i);
+		dePtr dice = std::make_shared<de>(i);
 		dice->roll(numberOfFaces);
 		dices.push_back(dice);
 	}
 }
 
-Yahtzee::lancer::~lancer()
-{
-}
-
 std::vector<unsigned int> Yahtzee::lancer::getDicesOccurences() const
 {
 	std::vector<unsigned int> dicesvalues(numberOfFaces, 0);
-	for (std::shared_ptr<de> dice : dices) {
+	for (dePtr dice : dices) {
 		++(dicesvalues.at(dice->value-1));
 	}
 	return dicesvalues;
@@ -60,7 +55,7 @@ void Yahtzee::lancer::sortDices()
 {
 	
 	std::sort(dices.begin(), dices.end(),
-		[](const std::shared_ptr<de>& d1, const std::shared_ptr<de>& d2) {
+		[](const dePtr& d1, const dePtr& d2) {
 			return d1->value < d2->value;
 		});
 		
@@ -73,7 +68,7 @@ void Yahtzee::lancer::showDices() const
 		<< "resulat du jet des des : \n";
 
 	int i = 0;
-	for (std::shared_ptr<de> dice : dices) {
+	for (dePtr dice : dices) {
 		std::cout << "\t" << ++i << ":\t" << *dice << "\n";
 		
 	}

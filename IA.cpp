@@ -18,6 +18,37 @@ std::string Yahtzee::IA::chooseDicesToRoll() const
 	return strChoices;
 }
 
+Yahtzee::figurePtr Yahtzee::IA::chooseFigure() const
+{
+	// choisie le maximum de points
+	figurePtr choosenFigure = nullptr;// = figures.at(0);
+	for (figurePtr figure : figures) {
+		if (!figure->isUsed()) {
+			if ( (choosenFigure == nullptr) || (*choosenFigure <= *figure) ) {
+				choosenFigure = figure;
+			}
+		}
+	}
+
+	std::cout << name << " a choisie : " << choosenFigure->getName() << std::endl;
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	return choosenFigure;
+
+	/*
+	// IA sans queue ni tete
+	unsigned int random = (unsigned int)rand() % (figures.size());
+	figurePtr choosenFigure = figures.at(random);
+
+	if (!(choosenFigure->isUsed())) {
+		std::cout << name << " choose : " << choosenFigure->getName() << std::endl;
+		return choosenFigure;
+	}
+	else {
+		return chooseFigure();
+	}
+	*/
+}
+
 
 
 

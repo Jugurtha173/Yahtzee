@@ -16,7 +16,7 @@ namespace Yahtzee {
 
 	public:
 		figure(const std::string& name) : name(name) {};
-		virtual ~figure() {};
+		virtual ~figure() = default;
 
 		const std::string getName();
 		bool isUsed();
@@ -31,6 +31,8 @@ namespace Yahtzee {
 	};
 
 	std::ostream& operator<<(std::ostream& out, const figure& figure);
+
+	typedef std::shared_ptr<figure> figurePtr;
 
 }
 

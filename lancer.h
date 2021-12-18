@@ -17,16 +17,16 @@ namespace Yahtzee {
 	{
 		unsigned int numberOfFaces = 6;
 		unsigned int numberOfDices = 5;
-		std::vector<std::shared_ptr<de>> dices;
+		std::vector<dePtr> dices;
 
 
 		void sortDices();
 
 	public:
 		lancer();
-		~lancer();
+		~lancer() = default;
 
-		std::vector<std::shared_ptr<de>>& getDices() { return dices; };
+		std::vector<dePtr>& getDices() { return dices; };
 		std::vector<unsigned int> getDicesOccurences() const ;
 
 		void rollAllDices();
@@ -39,6 +39,8 @@ namespace Yahtzee {
 		friend class figure;
 
 	};
+
+	typedef std::shared_ptr<lancer> lancerPtr;
 
 }
 
