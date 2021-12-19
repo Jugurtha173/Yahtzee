@@ -1,8 +1,9 @@
 # Yahtzee (C++)
 
-1) Yahtzee :
+## Arborescence
+### 1) /Yahtzee
 le projet contient les fichiers suivant :
-	
+	<pre>
 	├── de.cpp
 	├── de.h
 		Classe pour representer les dés,
@@ -10,8 +11,8 @@ le projet contient les fichiers suivant :
 		la méthode "roll" pour lancer le dé,
 		qui lui affecteras une valeur entre un min et un max donné,
 		qu'on peut donc modifier si on veux customiser le jeu,
-		
-	
+	</pre>
+	<pre>
 	├── figure.cpp
 	├── figure.h
 		Classe abstraite pour representer les figures,
@@ -20,10 +21,8 @@ le projet contient les fichiers suivant :
 		les points quand le joueur auras choisis la figure,
 		un boolean pour dire si la figure a été utilisé ou pas,
 		une méthode virtual pure "eval" qui calcule les points qu'on peut rapporter selon les dés lancés.
-		
-		
-		
-	
+	</pre>
+	<pre>
 	├── figureInferieur.cpp
 	├── figureInferieur.h
 		Classe pour representer les figures de la partie inférieure,
@@ -33,19 +32,21 @@ le projet contient les fichiers suivant :
 			- identique
 			- suite
 			- figuresMultiple
-	
+	</pre>
+	<pre>
 	├── figureSuperieur.cpp
 	├── figureSuperieur.h
 		Classe pour representer les figures de la partie supérieure,
 		hérite de la classe figure,
 		avec une valeur (As => 1).
-
-	
+	</pre>
+	<pre>
 	├── figuresJeu.h
 		classe pour representer les figures qu'on utilisera dans notre partie de jeu,
 		qu'on peut donc modifier si on veux customiser le jeu,
 		avec un méthode static qui renvoie un tableau de toutes ces figures
-	
+	</pre>
+	<pre>
 	├── joueur.cpp
 	├── joueur.h
 		Classe pour representer les joueurs
@@ -55,9 +56,10 @@ le projet contient les fichiers suivant :
 		un tableau de figures qui sont toutes les figures du jeu (figuresJeu),
 		un (smart)pointeur sur un objet lancer,
 		deux méthodes virtual :
-			 - chooseDicesToRoll, dans le cas d'un joueur normal, il saisie les indices des dés au clavier.
-			 - chooseFigure, dans le cas d'un joueur normal, il saisie le nom de la figure au clavier.
-	
+			- chooseDicesToRoll, dans le cas d'un joueur normal, il saisie les indices des dés au clavier.
+			- chooseFigure, dans le cas d'un joueur normal, il saisie le nom de la figure au clavier.
+	</pre>
+	<pre>
 	├── IA.cpp
 	├── IA.h
 		Classe pour representer une IA
@@ -65,8 +67,8 @@ le projet contient les fichiers suivant :
 		deux méthodes override :
 			 - chooseDicesToRoll, l'IA relance toujours les dés au hasard.
 			 - chooseFigure, l'IA choisis la figure qui rapporte le plus de points.
-		
-	
+	</pre>	
+	<pre>
 	├── lancer.cpp
 	├── lancer.h
 		Classe pour representer un lancer
@@ -74,27 +76,34 @@ le projet contient les fichiers suivant :
 		le nombre de dés (5),
 		le nombre de leurs faces (6),
 		qu'on peut donc modifier si on veux customiser le jeu.
-	
+	</pre>
+	<pre>
 	├── partie.cpp
 	├── partie.h	
 		Classe pour representer une partie,
 		avec un tableau de joueur et un lancer
-	
+	</pre>
+	<pre>
 	├── Yahtzee.cpp
 		programme principal
-	
+	</pre>
 
-2) YahtzeeTests:
+### 2) YahtzeeTests:
 le projet contient les fichiers de tests du projet Yahtzee.
-	test l'ajout d'un joueur,
-	un joueur qui gagne des points,
-	le choix d'une figure uniquement si elle est disponible,
-	le lancé de dés...
+<pre>
+test l'ajout d'un joueur,
+un joueur qui gagne des points,
+le choix d'une figure uniquement si elle est disponible,
+le lancé de dés...
+</pre>
+
+### 3) Demo:
+
+Avec une diapo ***Yahtzee.pptx*** pour une petite demo 
 
 
-
-FONCTIONNEMENT :
-
+### Fonctionnement
+<pre>
 le programme commence par créer une partie,
 avec un nombre de joueurs donné (2 par defaut).
 
@@ -120,7 +129,7 @@ un tri se fait sur le tableau de joueurs par rapport à leurs total de points,
 et le jeu afiche un poduim selon le classement.
 
 FIN DU JEU.
-
+</pre>
 
 
 
