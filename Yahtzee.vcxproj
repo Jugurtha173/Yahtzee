@@ -142,7 +142,6 @@
     <ClCompile Include="de.cpp" />
     <ClCompile Include="figure.cpp" />
     <ClCompile Include="figureInferieur.cpp" />
-    <ClCompile Include="figuresJeu.cpp" />
     <ClCompile Include="figureSuperieur.cpp" />
     <ClCompile Include="IA.cpp" />
     <ClCompile Include="joueur.cpp" />

@@ -1,19 +1,17 @@
+// Jugurtha ASMA && Hylia BOUDAHBA
+
 #include "joueur.h"
+#include "figuresJeu.h"
 #include <iomanip>
 
-Yahtzee::joueur::joueur(std::string name, lancerPtr roll, std::vector<figurePtr> figures) :
-    name(name), roll(roll), figures(figures)
-{
-
-};
+Yahtzee::joueur::joueur(std::string name, lancerPtr roll)
+    : name(name), roll(roll), figures(figuresJeu::getFigures()) {};
 
 void Yahtzee::joueur::play() const 
 {
     roll->rollAllDices();
 	std::string strChoices;
 	for ( unsigned int i = 1; i <= nbrTurns; ++i) {
-
-
         // evaluation des figures
         evalFigures();
 
@@ -58,27 +56,6 @@ Yahtzee::figurePtr Yahtzee::joueur::chooseFigure() const
 
     std::cout << "Choisir une figure existante : ";
     return chooseFigure();
-
-    /*
-    unsigned int input;
-
-    try {
-
-        input = extractInts(strChoice).at(0);
-    }
-    catch (std::exception e) {
-        std::cout << "\nSaisir une valeur entiere (indice) : ";
-        return chooseFigure();
-    }
-
-    if (input < 1 || input > figures.size() || figures.at(input-1)->isUsed()) {
-
-        std::cout << "\nSaisir l'indice des figures diponibles :  ";
-        return chooseFigure();
-
-    }
-    */
-    //return input;
 }
 
 void Yahtzee::joueur::evalFigures() const
@@ -101,7 +78,6 @@ void Yahtzee::joueur::evalFigures() const
         }
     }
 }
-
 
 void Yahtzee::joueur::makeChoice()
 {
@@ -141,6 +117,11 @@ unsigned int Yahtzee::joueur::getTotalPoints() const
     return totalInf + totalSup;
 }
 
+std::string Yahtzee::joueur::getName() const
+{
+    return name;
+}
+
 bool Yahtzee::joueur::hasFinished() const
 {
     // si il y a encore une figure non utilisee, alors le joueur n'a pas fini
@@ -171,7 +152,6 @@ std::vector<unsigned int> Yahtzee::joueur::extractInts(std::string str) const
         temp = "";
 
     }
-
     return choices;
 }
 

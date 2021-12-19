@@ -1,5 +1,6 @@
-#include "lancer.h"
+// Jugurtha ASMA && Hylia BOUDAHBA
 
+#include "lancer.h"
 
 Yahtzee::lancer::lancer()
 {
@@ -33,13 +34,9 @@ void Yahtzee::lancer::rollAllDices()
 
 void Yahtzee::lancer::rollDices(const std::vector<unsigned int>& indexes)
 {
-
 	rollDicesByIndex(indexes);
-
 	sortDices();
-
 	showDices();
-
 }
 
 void Yahtzee::lancer::rollDicesByIndex(const std::vector<unsigned int>& indexes)
@@ -53,12 +50,10 @@ void Yahtzee::lancer::rollDicesByIndex(const std::vector<unsigned int>& indexes)
 
 void Yahtzee::lancer::sortDices() 
 {
-	
 	std::sort(dices.begin(), dices.end(),
 		[](const dePtr& d1, const dePtr& d2) {
 			return d1->value < d2->value;
-		});
-		
+		});	
 }
 
 void Yahtzee::lancer::showDices() const

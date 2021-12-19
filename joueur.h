@@ -1,11 +1,10 @@
-#pragma once
+// Jugurtha ASMA && Hylia BOUDAHBA
 
+#pragma once
 #include <string>
 #include <vector>
 #include <iostream>
 #include <sstream>
-
-
 #include "lancer.h"
 #include "figure.h"
 #include "figureSuperieur.h"
@@ -16,9 +15,9 @@ namespace Yahtzee {
 	class joueur
 	{
 	protected:
-		//
+		
 		const static unsigned int nbrTurns = 3;
-		//
+		
 		unsigned int totalSup = 0;
 		unsigned int totalInf = 0;
 		const std::string name;
@@ -26,7 +25,7 @@ namespace Yahtzee {
 		lancerPtr roll;
 
 	public:
-		joueur(std::string name, lancerPtr roll, std::vector<figurePtr> figures);
+		joueur(std::string name, lancerPtr roll);
 		virtual ~joueur() = default;
 
 		void play() const;
@@ -38,6 +37,7 @@ namespace Yahtzee {
 		void makeChoice();
 		
 		unsigned int getTotalPoints() const;
+		std::string getName() const;
 		bool hasFinished() const;
 
 		std::vector<unsigned int> extractInts(std::string str) const ;
@@ -50,8 +50,4 @@ namespace Yahtzee {
 	std::ostream& operator<<(std::ostream& out, const joueur& player);
 
 	typedef std::shared_ptr<joueur> joueurPtr;
-
 }
-
-
-

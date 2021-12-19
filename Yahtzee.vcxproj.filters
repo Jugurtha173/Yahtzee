@@ -24,9 +24,6 @@
     <ClCompile Include="figureInferieur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="figuresJeu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="figureSuperieur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -1,3 +1,5 @@
+// Jugurtha ASMA && Hylia BOUDAHBA
+
 #include "figure.h"
 
 const std::string Yahtzee::figure::getName()

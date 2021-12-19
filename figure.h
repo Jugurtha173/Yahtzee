@@ -1,5 +1,6 @@
-#pragma once
+// Jugurtha ASMA && Hylia BOUDAHBA
 
+#pragma once
 #include <string>
 #include <iostream>
 #include "lancer.h"
@@ -33,7 +34,4 @@ namespace Yahtzee {
 	std::ostream& operator<<(std::ostream& out, const figure& figure);
 
 	typedef std::shared_ptr<figure> figurePtr;
-
 }
-
-

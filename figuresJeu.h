@@ -1,6 +1,6 @@
+// Jugurtha ASMA && Hylia BOUDAHBA
+
 #pragma once
-
-
 #include <vector>
 #include "figureSuperieur.h"
 #include "figureInferieur.h"
@@ -22,7 +22,6 @@ namespace Yahtzee {
 			figures.push_back(std::make_shared<figureSuperieur>("Quatre", 4));
 			figures.push_back(std::make_shared<figureSuperieur>("Cinq", 5));
 			figures.push_back(std::make_shared<figureSuperieur>("Six", 6));
-
 			
 			figures.push_back(std::make_shared<identical<3>>("Brelan"));
 			figures.push_back(std::make_shared<suite<4, 30>>("Petite S"));
@@ -35,8 +34,4 @@ namespace Yahtzee {
 			return figures;
 		}
 	};
-
 }
-
-
-

@@ -1,3 +1,5 @@
+// Jugurtha ASMA && Hylia BOUDAHBA
+
 #include "de.h"
 
 void Yahtzee::de::roll(int max, int min)
@@ -6,3 +8,7 @@ void Yahtzee::de::roll(int max, int min)
 	value = random;
 }
 
+std::ostream& Yahtzee::operator<<(std::ostream& out, const de& dice)
+{
+	return out << "[" << dice.value << "] ";
+}

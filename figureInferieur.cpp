@@ -1,3 +1,5 @@
+// Jugurtha ASMA && Hylia BOUDAHBA
+
 #include "figureInferieur.h"
 
 unsigned int Yahtzee::chance::eval(const std::vector<unsigned int>& dicesOccurences)

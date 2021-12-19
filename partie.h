@@ -1,9 +1,7 @@
+// Jugurtha ASMA && Hylia BOUDAHBA
+
 #pragma once
-
-
 #include <vector>
-
-
 #include "joueur.h"
 #include "IA.h"
 #include "lancer.h"
@@ -12,7 +10,6 @@
 
 namespace Yahtzee {
 
-
 	class partie
 	{
 		static int NUMBER_OF_PLAYERS;
@@ -20,7 +17,6 @@ namespace Yahtzee {
 
 		std::vector<joueurPtr> players;
 		unsigned int numberPlayers;
-		std::vector<figure*> figures;
 		lancerPtr roll;
 
 	public:
@@ -30,13 +26,14 @@ namespace Yahtzee {
 
 		void initPlayers();
 		void launch();
+
+		std::vector<joueurPtr> getPlayers() const;
+		lancerPtr getLancer() const;
+		void addPlayer(const joueurPtr player);
+
 		void showTable() const;
 		void showScores();
 
 		void separate(int allSize) const;
 	};
-
 }
-
-
-

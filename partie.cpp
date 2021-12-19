@@ -1,3 +1,5 @@
+// Jugurtha ASMA && Hylia BOUDAHBA
+
 #include "partie.h"
 #include <iomanip>
 #include <memory>
@@ -14,12 +16,12 @@ Yahtzee::partie::partie(int numberPlayers)
 
 void Yahtzee::partie::initPlayers()
 {
-	joueurPtr player = std::make_shared<joueur>("J #1", roll, figuresJeu::getFigures());
-	players.push_back(player);
+	joueurPtr player = std::make_shared<joueur>("J #1", roll);
+	addPlayer(player);
 
 	for (unsigned int i = 2; i <= numberPlayers; ++i) {
-		joueurPtr IAplayer = std::make_shared<IA>("IA #" + std::to_string(i), roll, figuresJeu::getFigures());
-		players.push_back(IAplayer);
+		joueurPtr IAplayer = std::make_shared<IA>("IA #" + std::to_string(i), roll);
+		addPlayer(IAplayer);
 
 	}
 }
@@ -45,14 +47,28 @@ void Yahtzee::partie::launch()
 				numberFinishedPlayers++;
 			}
 		}
-	}
-	
+	}	
 	showScores();
+}
+
+std::vector<Yahtzee::joueurPtr> Yahtzee::partie::getPlayers() const
+{
+	return players;
+}
+
+Yahtzee::lancerPtr Yahtzee::partie::getLancer() const
+{
+	return roll;
+}
+
+void Yahtzee::partie::addPlayer(const Yahtzee::joueurPtr player)
+{
+	players.push_back(player);
 }
 
 void Yahtzee::partie::showTable() const
 {
-	unsigned int numberFigures = players.at(0)->figures.size();
+	size_t numberFigures = players.at(0)->figures.size();
 	int sizeOfCell = 10;
 	int sizeOfRow = sizeOfCell + (2 * sizeOfCell * numberPlayers);
 
@@ -74,7 +90,6 @@ void Yahtzee::partie::showTable() const
 			std::cout << std::setw(sizeOfCell) << *(fig) << std::setw(sizeOfCell) << "|";
 
 		}
-
 		separate(sizeOfRow);
 	}
 
@@ -85,12 +100,10 @@ void Yahtzee::partie::showTable() const
 
 	separate(sizeOfRow);
 	std::cout << "\n\n";
-
 }
 
 void Yahtzee::partie::showScores()
 {
-
 	std::sort(players.begin(), players.end(),
 		[](const joueurPtr& p1, const joueurPtr& p2) {
 			return p1->getTotalPoints() > p2->getTotalPoints();
@@ -119,9 +132,7 @@ void Yahtzee::partie::showScores()
 		std::cout << "------------";
 
 	}
-	std::cout << "|";
-
-	
+	std::cout << "|";	
 }
 
 void Yahtzee::partie::separate(int sizeOfRow) const
@@ -133,5 +144,4 @@ void Yahtzee::partie::separate(int sizeOfRow) const
 		<< "" 
 		<< std::endl 
 		<< std::setfill(' ');
-
 }

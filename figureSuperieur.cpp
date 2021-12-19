@@ -1,6 +1,6 @@
-#include "figureSuperieur.h"
-#include <iomanip>
+// Jugurtha ASMA && Hylia BOUDAHBA
 
+#include "figureSuperieur.h"
 
 unsigned int Yahtzee::figureSuperieur::eval(const std::vector<unsigned int>& dicesOccurences)
 {
